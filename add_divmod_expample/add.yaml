@@ -1,0 +1,18 @@
+name: Add
+description: Calculates sum of two arguments
+inputs:
+- {name: a, type: Float}
+- {name: b, type: Float}
+outputs:
+- {name: sum, type: Float}
+implementation:
+  container:
+    image: jackfantasy/kfp_add:v1
+    command: [python, add.py]
+    args:
+    - '--a'
+    - {inputValue: a}
+    - '--b'
+    - {inputValue: b}
+    - '--output_path'
+    - {outputPath: sum}

@@ -1,0 +1,24 @@
+name: My divmod
+description: Divides two numbers and calculate  the quotient and remainder
+inputs:
+- {name: dividend, type: Float}
+- {name: divisor, type: Float}
+outputs:
+- {name: quotient, type: Float}
+- {name: remainder, type: Float}
+- {name: mlpipeline_ui_metadata, type: UI_metadata}
+- {name: mlpipeline_metrics, type: Metrics}
+implementation:
+  container:
+    image: jackfantasy/kfp_add:v1
+    command: [python, divmod.py]
+    args:
+    - '--dividend'
+    - {inputValue: dividend}
+    - '--divisor'
+    - {inputValue: divisor}
+    - '--output_paths'
+    - {outputPath: quotient}
+    - {outputPath: remainder}
+    - {outputPath: mlpipeline_ui_metadata}
+    - {outputPath: mlpipeline_metrics}
